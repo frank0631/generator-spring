@@ -21,8 +21,9 @@
     "test": "mocha"
   },
   "dependencies": {
+    "chalk": "~0.2.0",
     "yeoman-generator": "~0.13.0",
-    "chalk": "~0.2.0"
+    "yeoman-option-or-prompt": "git://github.com/frank0631/yeoman-option-or-prompt.git#master"
   },
   "devDependencies": {
     "mocha": "~1.12.0"

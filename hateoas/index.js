@@ -1,9 +1,11 @@
 'use strict';
 var util = require('util');
 var yeoman = require('yeoman-generator');
+var optionOrPrompt = require('yeoman-option-or-prompt');
 
 var HateoasGenerator = module.exports = function HateoasGenerator(args, options, config) {
     yeoman.generators.Base.apply(this, arguments);
+    this._optionOrPrompt = optionOrPrompt;
 };
 
 util.inherits(HateoasGenerator, yeoman.generators.Base);
@@ -36,9 +38,9 @@ HateoasGenerator.prototype.askFor = function askFor() {
             message: '(4/4) Path to Controller:',
             default: '/hello-world'
         }
-    ]
+    ];
 
-    this.prompt(prompts, function (props) {
+    this._optionOrPrompt( prompts, function ( props ) {
         this.packageName = props.packageName;
         this.representation = props.representation;
         this.controllerName = props.controllerName;

@@ -3,9 +3,11 @@ var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
+var optionOrPrompt = require('yeoman-option-or-prompt');
 
 var SpringGenerator = module.exports = function SpringGenerator(args, options, config) {
     yeoman.generators.Base.apply(this, arguments);
+    this._optionOrPrompt = optionOrPrompt;
 };
 
 util.inherits(SpringGenerator, yeoman.generators.Base);
@@ -120,7 +122,8 @@ SpringGenerator.prototype.askFor = function askFor() {
         }
     ];
 
-    this.prompt(prompts, function (props) {
+    this._optionOrPrompt( prompts, function ( props ) {
+
         this.packageName = props.packageName;
         this.baseName = props.baseName;
         this.useWrapper = props.useWrapper;
@@ -128,7 +131,9 @@ SpringGenerator.prototype.askFor = function askFor() {
         this.useSpock = props.useSpock;
         this.starters = props.starters;
 
-        var hasStarter = function (starter) { return props.starters.indexOf(starter) !== -1; };
+        var hasStarter = function (starter) {
+          return props.starters.indexOf(starter) !== -1;
+        };
         this.jetty = hasStarter('jetty');
         this.actuator = hasStarter('actuator');
         this.aop = hasStarter('aop');
